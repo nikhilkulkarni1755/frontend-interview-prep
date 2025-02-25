@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form and Form Validation</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <form id="form">
+            <input type="text" id="name" placeholder="Enter name">
+            <input type="email" id="email" placeholder="Enter email">
+            <input type="password" id="password" placeholder="Enter password">
+            <button id="submit">Add to list</button>
+            <p class="error" id="err"></p>
+        </form>
+
+        <ul id="list"></ul>
+
+        <script>
+            document.getElementById('form').addEventListener('submit', (e) => {
+                e.preventDefault()
+
+                const name = document.getElementById('name').value.trim()
+                const email = document.getElementById('email').value.trim()
+                const password = document.getElementById('password').value.trim()
+                const err = document.getElementById('err')
+                
+                if(!name || !email || !password) {
+                    err.textContent = 'name, email and password required'
+                    return
+                }
+                if(!/^\S+@\S+\.\S+$/.test(email)) {
+                    err.textContent = 'enter a valid email'
+                    return
+                }
+
+                err.textContent = ""
+
+                const li = document.createElement('li')
+                li.textContent = `${name} (${email})`
+
+                document.getElementById('list').append(li)
+                document.getElementById('form').reset()
+            })
+        </script>
+
+
+    </body>
+</html>
