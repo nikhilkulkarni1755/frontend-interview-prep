@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>To Do List</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <input id="input" placeholder="Add the todo here ... ">
+        <button id="submit">Submit</button>
+        <ul id="list"></ul>
+
+        <script>
+
+            function addToList() {
+                if(!input.value) return
+                let value = input.value.trim()
+                const newli = document.createElement('li')
+                newli.textContent = value
+                list.append(newli)
+            }
+
+            const input = document.getElementById('input')
+            const button = document.getElementById('submit')
+            const list = document.getElementById('list')
+
+            input.addEventListener('keydown', (e) => {
+                if(e.key == 'Enter') {
+                    addToList()
+                }
+            })
+
+            button.addEventListener('click', () => {
+                addToList()
+            })
+        </script>
+    </body>
+</html>

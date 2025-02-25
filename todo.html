@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <!-- todo -->
+        <input id="input" placeholder="Add your todo here">
+        <button id="submit">Submit</button>
+        <ul id="list"></ul>
+
+        <script>
+            const input = document.getElementById('input')
+            const submit = document.getElementById('submit')
+            const list = document.getElementById('list')
+
+            submit.addEventListener('click', () => {
+                let data = input.value.trim()
+
+                const newli = document.createElement('li')
+                // newli.
+                newli.textContent = data
+                list.append(newli)
+                input.value = ""
+                input.focus()
+            })
+
+            input.addEventListener('keydown', (e) => {
+                if(e.key === 'Enter') {
+                    let data = input.value.trim()
+
+                    const newli = document.createElement('li')
+                    // newli.
+                    newli.textContent = data
+                    list.append(newli)
+                    input.value = ""
+                    input.focus()
+                }
+            })
+        </script>
+    </body>
+</html>

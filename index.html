@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            To Do List
+        </title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <h2>To Do List</h2>
+        <!-- input -->
+        <!-- div to place all the todos in -->
+
+        <input type="text" id="input" placeholder="Add task here ...">
+        <button id="addTask" disabled>Add Task</button>
+        <ul id="taskList"></ul>
+
+        <script>
+            const input = document.getElementById('input')
+            const button = document.getElementById('addTask')
+            const list = document.getElementById('taskList')
+
+            input.addEventListener('input', () => {
+                button.disabled = input.value.trim() === ''
+            })
+
+            button.addEventListener('click', () => {
+                let data = input.value.trim()
+                if(!data) {
+                    return
+                }
+
+                const li = document.createElement('li')
+                li.textContent = data
+                // list.append(<li>{data}</li>)
+
+                list.append(li)
+
+
+
+            })
+
+
+        </script>
+    </body>    
+</html>

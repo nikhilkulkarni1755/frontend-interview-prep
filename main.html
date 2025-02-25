@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            To Do App
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                text-align: center;
+            }
+            .clicked {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="nav-bar">
+            
+        </div>
+        <h2>To Do App</h2>
+        <p id="subheading">Dogs are amazing</p>
+        <!-- input box -->
+        <input type="text" id="input" placeholder="Add your tasks here">
+        <!-- submit button -->
+        <button id="submit">Add Task</button>
+        <button id="run">Get Data!</button>
+        <!-- element to store all the notes -->
+        <ul id="taskList"></ul>
+        <ul id="click"></ul>
+
+        <script>
+            const input = document.getElementById('input')
+            const button = document.getElementById('submit')
+            const list = document.getElementById('taskList')
+            const clicked = document.getElementById('click')
+            const subheading = document.getElementById('subheading')
+            const run = document.getElementById('run')
+
+            run.addEventListener('click', async () => {
+                // fetch data from a url
+                // serve in a specific p
+                let url = 'http://nsk1755server.com/ip'
+                try {
+                    let data = await fetch(url)
+                    let response = await data.text()
+                    subheading.innerHTML = 'Welcome from ' + response
+
+                } catch(error) {
+                    subheading.innerHTML = 'error getting stuff from the url'
+                }
+
+            })
+
+            // input.addEventListener('')
+
+            button.addEventListener('click', () => {
+                let data = input.value.trim()
+
+                if(!data) {
+                    return
+                }
+
+                const li = document.createElement('li')
+                li.addEventListener('click', () => {
+                    const status = document.createElement('li')
+                    status.textContent = li.textContent + " clicked!"
+                    status.classList.add('clicked')
+                    clicked.append(status)
+                    // didn't work
+                    // subheading.value = "Meowww"
+                    subheading.innerHTML = "meowwwwwwwwww"
+                })
+                li.textContent = data
+
+                list.append(li)
+                input.value = ""
+                input.focus()
+            })
+        </script>
+    </body>
+</html>
