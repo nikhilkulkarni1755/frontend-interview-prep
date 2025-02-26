@@ -1,0 +1,26 @@
+export const handler = async (event) => {
+  // fetch data from musicbrainz api
+
+  // return the top relevant stuff
+
+  let param = event.queryStringParameters?.album || "none"
+
+  if(param === "none") {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: "No album provided",
+      }),
+    };
+  }
+  else {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: `You searched for ${param}`,
+      }),
+    };
+  }
+
+
+};
