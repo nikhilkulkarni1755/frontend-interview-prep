@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <form id="form">
+            <input id="name" type="text" placeholder="Enter name ...">
+            <input id="email" type="email" placeholder="Enter email ..."> 
+            <input id="password" type="password" placeholder="Enter password ...">
+            <input id="confirm" type="password" placeholder="Confirm password ...">
+            <button id="submit" type="submit">Submit</button>
+        </form>
+        <p id="err"></p>
+
+        <ul id="users"></ul>
+
+        <script>
+            const form = document.getElementById('form')
+            const name = document.getElementById('name')
+            const email = document.getElementById('email')
+            const password = document.getElementById('password')
+            const confirmp = document.getElementById('confirm')
+            const submit = document.getElementById('submit')
+            const err = document.getElementById('err')
+            const list = document.getElementById('users')
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                if(!name.value || !email.value || !password.value || !confirmp.value) {
+                    err.textContent = "Add name, email, password and confirm password pls"
+                    return
+                }
+
+                if(password.value.trim() !== confirmp.value.trim()) {
+                    err.textContent = "password and confirm password should be equal"
+                    return
+                }
+
+                if(!/^\S+@\S+\.\S+$/.test(email.value)){
+                    err.textContent = "add a valid email pls"
+                    return
+                }
+
+                err.textContent = ""
+
+                const li = document.createElement('li')
+                li.textContent = `${name.value.trim()}, ${email.value.trim()}, ${password.value.trim()}`
+                list.appendChild(li)
+                form.reset()
+
+            })
+        </script>
+    </body>
+</html>
