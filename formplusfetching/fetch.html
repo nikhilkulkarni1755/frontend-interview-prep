@@ -7,39 +7,68 @@
     </head>
     <body>
 
+        <!-- sort dynamically -->
+        <button id="firstName">sort by fName</button>
+        <button id="lastName">sort by lName</button>
+        <button id="age">sort by age</button>
+
         <table id="table">
             <tr>
                 <!-- Avatar, Name, Email, Age, Location (City, Country). -->
                 <!-- <th>Avatar</th> -->
                 <th>Name</th>
                 <th>Email</th>
-                <!-- <th>Age</th> -->
+                <th>Age</th>
                 <th>Location</th>
             </tr>
         </table>
         <script>
 
+            let userData = []
+
             const table = document.getElementById('table')
+            const firstName = document.getElementById('firstName')
+            const lastName = document.getElementById('lastName')
+            const age = document.getElementById('age')
 
-            async function getData() {
-                let data = await fetch('https://randomuser.me/api/?results=100')
-                let response = await data.json()
-                console.log(response)
+            firstName.addEventListener('click', () => {
+                userData.sort((a,b) => (a.name.first.localeCompare(b.name.first)))
+                populate()
+            })
 
-                for(let i = 0; i < response.results.length; i++) {
+            lastName.addEventListener('click', () => {
+                userData.sort((a,b) => (a.name.last.localeCompare(b.name.last)))
+                populate()
+            })
+
+            age.addEventListener('click', () => {
+                userData.sort((a,b) => (a.dob.age - b.dob.age))
+                populate()
+            })
+
+            function populate() {
+                table.innerHTML = `<tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Location</th>
+            </tr>`
+                for(let i = 0; i < userData.length; i++) {
                     // console.log(response.results[i])
                     const newRow = document.createElement('tr')
                     const nameCell = newRow.insertCell()
-                    nameCell.textContent = response.results[i].name.first + " " + response.results[i].name.last
+                    nameCell.textContent = userData[i].name.first + " " + userData[i].name.last
                     // newRow.insertCell(response.results[i].picture.thumbnail)
                     // // console.log(response.results[i].name.first + " " + response.results[i].name.last)
                     // newRow.insertCell(response.results[i].name.first + " " + response.results[i].name.last)
                     const emailCell = newRow.insertCell()
-                    emailCell.textContent = response.results[i].email
+                    emailCell.textContent = userData[i].email
                     // newRow.insertCell(response.results[i].email)
                     // // newRow.insertCell(response.results[i].age)
+                    const ageCell = newRow.insertCell()
+                    ageCell.textContent = userData[i].dob.age
                     const locCell = newRow.insertCell()
-                    locCell.textContent = response.results[i].location.city + ", " + response.results[i].location.country
+                    locCell.textContent = userData[i].location.city + ", " + userData[i].location.country
 
                     table.append(newRow)
                     // newRow.insertCell(response.results[i].location.city + ", " + response.results[i].location.country) // city, country
@@ -47,15 +76,28 @@
 
                     // apparently we need to create a whole cell and a half for this solution
 
-
+                    // return response.results
 
 
                 }
-                
-                
+            }
+             
+
+            async function getData() {
+                let data = await fetch('https://randomuser.me/api/?results=100')
+                let response = await data.json()
+
+                // method 1: sort right after fetching. 
+                // response.results.sort((a,b) => a.name.last.localeCompare(b.name.last))
+                // response.results.sort((a, b) => b.dob.age - a.dob.age)
+
+                // console.log(response)
+                userData = response.results
+                populate()
             }
 
             getData()
+            // console.log(`outside the async function${userData}`)
         </script>
     </body>
 </html>
