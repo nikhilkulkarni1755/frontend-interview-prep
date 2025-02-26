@@ -1,0 +1,11 @@
+export const handler = async (event) => {
+  return {
+    statusCode: 200,
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*", // Enables CORS
+    },
+    body: JSON.stringify(Hello nsk1755),
+  };
+};
+
