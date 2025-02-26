@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fetch 100 elements</title>
+    </head>
+    <body>
+
+        <table id="table">
+            <tr>
+                <!-- Avatar, Name, Email, Age, Location (City, Country). -->
+                <!-- <th>Avatar</th> -->
+                <th>Name</th>
+                <th>Email</th>
+                <!-- <th>Age</th> -->
+                <th>Location</th>
+            </tr>
+        </table>
+        <script>
+
+            const table = document.getElementById('table')
+
+            async function getData() {
+                let data = await fetch('https://randomuser.me/api/?results=100')
+                let response = await data.json()
+                console.log(response)
+
+                for(let i = 0; i < response.results.length; i++) {
+                    // console.log(response.results[i])
+                    const newRow = document.createElement('tr')
+                    const nameCell = newRow.insertCell()
+                    nameCell.textContent = response.results[i].name.first + " " + response.results[i].name.last
+                    // newRow.insertCell(response.results[i].picture.thumbnail)
+                    // // console.log(response.results[i].name.first + " " + response.results[i].name.last)
+                    // newRow.insertCell(response.results[i].name.first + " " + response.results[i].name.last)
+                    const emailCell = newRow.insertCell()
+                    emailCell.textContent = response.results[i].email
+                    // newRow.insertCell(response.results[i].email)
+                    // // newRow.insertCell(response.results[i].age)
+                    const locCell = newRow.insertCell()
+                    locCell.textContent = response.results[i].location.city + ", " + response.results[i].location.country
+
+                    table.append(newRow)
+                    // newRow.insertCell(response.results[i].location.city + ", " + response.results[i].location.country) // city, country
+                    // table.appendChild(newRow)
+
+                    // apparently we need to create a whole cell and a half for this solution
+
+
+
+
+                }
+                
+                
+            }
+
+            getData()
+        </script>
+    </body>
+</html>
