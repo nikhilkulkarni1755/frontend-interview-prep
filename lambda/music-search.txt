@@ -3,6 +3,8 @@ export const handler = async (event) => {
 
   // return the top relevant stuff
 
+  https://jbmzyrrrka.execute-api.us-east-2.amazonaws.com/default/music-search?album=meow
+
   let param = event.queryStringParameters?.album || "none"
 
   if(param === "none") {
