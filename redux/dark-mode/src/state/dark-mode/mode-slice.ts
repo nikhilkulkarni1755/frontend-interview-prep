@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 interface ModeState {
 	darkMode: boolean
@@ -16,7 +16,25 @@ const modeSlice = createSlice({
 			state.darkMode = !state.darkMode
 		},
 	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(toggleAsync.pending, () => {
+				console.log("promise pending")
+			})
+			.addCase(toggleAsync.fulfilled, (state) => {
+				console.log("promise fulfilled")
+				state.darkMode = !state.darkMode
+			})
+	},
 })
+
+export const toggleAsync = createAsyncThunk(
+	"async/toggle",
+	async (state: boolean) => {
+		await new Promise((resolve) => setTimeout(resolve, 1000))
+		return state
+	}
+)
 
 export const { toggle } = modeSlice.actions
 
