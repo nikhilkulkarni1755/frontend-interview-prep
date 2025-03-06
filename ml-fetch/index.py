@@ -14,6 +14,6 @@ def classify_image(image_path):
     for label in response['Labels']:
         print(f"{label['Name']} : {label['Confidence']:.2f}%")
 
-# huracan = "./huracan-offroad.jpg"
+huracan = "./huracan-offroad.jpg"
 mclaren = "McLaren_P1.jpg"
 classify_image(mclaren)

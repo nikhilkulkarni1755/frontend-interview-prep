@@ -1,2 +1,5 @@
 redux/node_modules
 ml-fetch/*.jpg
+ml-fetch/text/*.jpeg
+ml-fetch/text/*.HEIC
+ml-fetch/text/*.txt
