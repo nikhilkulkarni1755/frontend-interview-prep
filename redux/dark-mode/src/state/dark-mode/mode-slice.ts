@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 interface ModeState {
+	// loading: undefined
 	darkMode: boolean
 }
 
